@@ -1,22 +1,12 @@
 ﻿using MP02;
 
-var archer1 = new Archer
-{
-    Names = new List<string> { "Jakiś", "Debil" }
-};
+var bow1 = new Bow(0, Material.Carbon);
 
-var coach1 = new Coach
-{
-    Names = new List<string> { "Roman", "Pękalski" }
-};
+var archer1 = Archer.CreateArcher(bow1, ["Jakiś", "Debil"]);
 
+var coach1 = new Coach(["Roman", "Pękalski"]);
 
 archer1.AddCoach(coach1);
 
-// archer1.AddCoach(coach1);
-// coach1.AddArcher(archer1);
-// coach1.AddArcher(archer1);
-
 Console.WriteLine(archer1);
-
 Console.WriteLine(coach1);
