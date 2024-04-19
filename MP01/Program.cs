@@ -1,6 +1,5 @@
 ﻿using MP01;
 
-
 void NicePrint(string text)
 {
     Console.WriteLine("=======================");
@@ -10,60 +9,46 @@ void NicePrint(string text)
 
 NicePrint("Czy wczytać łuczników z pliku archers.json? (t/n)");
 var response = Console.ReadLine();
-if (response == "t")
-{
-    Archer.DeserializeArchers();
-}
+if (response == "t") Archer.DeserializeArchers();
 
 NicePrint("Lista łuczników po wczytaniu z pliku:");
-foreach (var archer in Archer.GetArchers())
-{
-    Console.WriteLine(archer);
-}
+foreach (var archer in Archer.GetArchers()) Console.WriteLine(archer);
 
-var arrowSet1 = new List<Arrow> { };
+var arrowSet1 = new List<Arrow>();
 for (var i = 0; i < 12; i++)
-{
-    arrowSet1.Add(new Arrow()
+    arrowSet1.Add(new Arrow
     {
         ArrowheadMaterial = ArrowheadMaterial.Wolfram,
         Length = 43.2,
         Material = "Carbon"
     });
-}
 
-var arrowSet2 = new List<Arrow> { };
+var arrowSet2 = new List<Arrow>();
 for (var i = 0; i < 12; i++)
-{
-    arrowSet2.Add(new Arrow()
+    arrowSet2.Add(new Arrow
     {
         ArrowheadMaterial = ArrowheadMaterial.StainlessSteel,
         Length = 36.5,
         Material = "Aluminium"
     });
-}
 
-var arrowSet3 = new List<Arrow> { };
+var arrowSet3 = new List<Arrow>();
 for (var i = 0; i < 12; i++)
-{
-    arrowSet3.Add(new Arrow()
+    arrowSet3.Add(new Arrow
     {
         ArrowheadMaterial = ArrowheadMaterial.Aluminium,
         Length = 50.0,
         Material = "Carbon"
     });
-}
 
-var arrowSet4 = new List<Arrow> { };
+var arrowSet4 = new List<Arrow>();
 for (var i = 0; i < 12; i++)
-{
-    arrowSet4.Add(new Arrow()
+    arrowSet4.Add(new Arrow
     {
         ArrowheadMaterial = ArrowheadMaterial.StainlessSteel,
         Length = 24,
         Material = "Aluminium"
     });
-}
 
 var archer1 = new Archer(arrowSet1, new DateOnly(2021, 10, 1))
 {
@@ -91,16 +76,10 @@ var archer4 = new Archer(arrowSet4, DateOnly.MinValue)
 };
 
 NicePrint("Lista łuczników:");
-foreach (var archer in Archer.GetArchers())
-{
-    Console.WriteLine(archer);
-}
+foreach (var archer in Archer.GetArchers()) Console.WriteLine(archer);
 
 NicePrint("Czy zapisać łuczników do pliku archers.json? (t/n)");
 response = Console.ReadLine();
-if (response == "t")
-{
-    Archer.SerializeArchers();
-}
+if (response == "t") Archer.SerializeArchers();
 
 NicePrint("Program zakończył działanie.");

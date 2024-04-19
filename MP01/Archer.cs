@@ -5,66 +5,17 @@ namespace MP01;
 
 public class Archer
 {
+    private const int MinArrows = 12;
+
     /// <summary>
-    /// Ekstensja
+    ///     Ekstensja
     /// </summary>
     private static List<Archer> Archers = [];
 
     /// <summary>
-    /// Identyfikator
+    ///     Identyfikator
     /// </summary>
     private static int _idCounter = 1;
-
-    public int Id { get; }
-
-
-    /// <summary>
-    /// Atrybut powtarzalny
-    /// </summary> 
-    public List<string> Names { get; set; } = [];
-
-
-    /// <summary>
-    /// Atrybut złożony
-    /// </summary>
-    [JsonInclude]
-    private List<Arrow> Arrows { get; set; } = [];
-
-    [JsonInclude] private DateOnly DateOfJoining { get; set; }
-
-
-    /// <summary>
-    /// Atrybut opcjonalny
-    /// </summary>
-    public string? PhoneNumber { get; set; }
-
-
-    /// <summary>
-    /// Atrybut klasowy
-    /// </summary>
-    public static string Club { get; set; } = "LKS Łucznik Żywiec";
-
-
-    private const int MinArrows = 12;
-
-    /// <summary>
-    /// Atrybut pochodny
-    /// </summary>
-    /// <param name="minArrows"></param>
-    /// <returns></returns>
-    public bool HasEnoughArrows
-    {
-        get { return Arrows.Count >= MinArrows; }
-    }
-
-    public int HowManyDaysInClub
-    {
-        get
-        {
-            DateTime dateTimeOfJoining = new DateTime(DateOfJoining.Year, DateOfJoining.Month, DateOfJoining.Day);
-            return (DateTime.Today - dateTimeOfJoining).Days;
-        }
-    }
 
 
     public Archer()
@@ -84,11 +35,56 @@ public class Archer
         Archers.Add(this);
     }
 
+    public int Id { get; }
+
+
+    /// <summary>
+    ///     Atrybut powtarzalny
+    /// </summary>
+    public List<string> Names { get; set; } = [];
+
+
+    /// <summary>
+    ///     Atrybut złożony
+    /// </summary>
+    [JsonInclude]
+    private List<Arrow> Arrows { get; set; } = [];
+
+    [JsonInclude] private DateOnly DateOfJoining { get; set; }
+
+
+    /// <summary>
+    ///     Atrybut opcjonalny
+    /// </summary>
+    public string? PhoneNumber { get; set; }
+
+
+    /// <summary>
+    ///     Atrybut klasowy
+    /// </summary>
+    public static string Club { get; set; } = "LKS Łucznik Żywiec";
+
+    /// <summary>
+    ///     Atrybut pochodny
+    /// </summary>
+    /// <param name="minArrows"></param>
+    /// <returns></returns>
+    public bool HasEnoughArrows => Arrows.Count >= MinArrows;
+
+    public int HowManyDaysInClub
+    {
+        get
+        {
+            var dateTimeOfJoining = new DateTime(DateOfJoining.Year, DateOfJoining.Month, DateOfJoining.Day);
+            return (DateTime.Today - dateTimeOfJoining).Days;
+        }
+    }
+
     public static void SerializeArchers()
     {
         try
         {
-            var serializerOptions = new JsonSerializerOptions() { IncludeFields = true };
+            var serializerOptions = new JsonSerializerOptions { IncludeFields = true };
             var serializedString = JsonSerializer.Serialize(Archers, serializerOptions);
             File.WriteAllText("archers.json", serializedString);
         }
@@ -110,12 +106,9 @@ public class Archer
                 return;
             }
 
-            var deserializerOptions = new JsonSerializerOptions() { IncludeFields = true };
+            var deserializerOptions = new JsonSerializerOptions { IncludeFields = true };
             var deserializedArchers = JsonSerializer.Deserialize<List<Archer>>(jsonString, deserializerOptions);
-            if (deserializedArchers != null)
-            {
-                Archers = deserializedArchers;
-            }
+            if (deserializedArchers != null) Archers = deserializedArchers;
 
             if (Archers.Count >= 1)
             {
@@ -143,13 +136,9 @@ public class Archer
         var phoneNumber = "";
         var names = string.Join(" ", Names);
         if (string.IsNullOrEmpty(PhoneNumber))
-        {
             phoneNumber = "Brak numeru telefonu";
-        }
         else
-        {
             phoneNumber = PhoneNumber;
-        }
 
         return
             $"Archer: {names}, {phoneNumber}, {Arrows.Count} arrows, {DateOfJoining} - {Club}, {HowManyDaysInClub} days in club";
