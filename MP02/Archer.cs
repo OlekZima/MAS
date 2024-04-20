@@ -5,7 +5,7 @@ namespace MP02;
 public class Archer
 {
     private readonly Bow _bow;
-    private Coach? _coach;
+    private Coach _coach;
 
     private Archer(Bow bow, List<string> names)
     {
@@ -27,7 +27,11 @@ public class Archer
 
     public void AddCoach(Coach coach)
     {
-        if (_coach != null) return;
+        if (_coach != null)
+        {
+            Console.WriteLine($"Archer {string.Join(" ", Names)} already has a coach!");
+            return;
+        }
 
         _coach = coach;
         coach.AddArcher(this);
