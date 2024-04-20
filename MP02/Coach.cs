@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace MP02;
+﻿namespace MP02;
 
 public class Coach
 {
@@ -11,7 +9,7 @@ public class Coach
         Names = names;
     }
 
-    private List<string> Names { get; init; }
+    private List<string> Names { get; }
 
     public void AddArcher(Archer archer)
     {

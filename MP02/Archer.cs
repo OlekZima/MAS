@@ -32,7 +32,9 @@ public class Archer
 
     public Competition? GetCompetition(int competitionId)
     {
-        return (from compete in _competes where compete.GetCompetition().Id == competitionId select compete.GetCompetition())
+        return (from compete in _competes
+                where compete.GetCompetition().Id == competitionId
+                select compete.GetCompetition())
             .FirstOrDefault();
     }
 

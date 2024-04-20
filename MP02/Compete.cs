@@ -20,7 +20,7 @@ public class Compete
 
     private int Score { get; }
 
-    private DateOnly Date { get; init; }
+    private DateOnly Date { get; }
 
     public Archer GetArcher()
     {
