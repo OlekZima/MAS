@@ -2,8 +2,8 @@ namespace MP02;
 
 public class Competition
 {
-    private static int _idCounter;
-    private readonly List<Archer> _archers = [];
+    private static int _idCounter = 1;
+    private readonly List<Compete> _competes = [];
 
     public Competition(string name)
     {
@@ -16,12 +16,20 @@ public class Competition
 
     public int Id { get; init; }
 
-
-    public void AddArcher(Archer archer)
+    public Archer? GetArcher(int archerId)
     {
-        if (!_archers.Contains(archer))
-            _archers.Add(archer);
-        else
-            throw new Exception($"Archer {string.Join(" ", archer.Names)} is already in the competition!");
+        return (from compete in _competes where compete.GetArcher().Id == archerId select compete.GetArcher())
+            .FirstOrDefault();
+    }
+
+    public void AddCompete(Compete compete)
+    {
+        if (_competes.Contains(compete))
+        {
+            Console.WriteLine("This compete already exists!");
+            return;
+        }
+
+        _competes.Add(compete);
     }
 }
