@@ -35,6 +35,29 @@ public class Bow
             throw new Exception($"Archer {string.Join(" ", archer.Names)} already uses this bow!");
     }
 
+    public void DeleteBow()
+    {
+        var archersToBeDeleted = new List<Archer>(_archers);
+        foreach (var archer in archersToBeDeleted)
+        {
+            archer.RemoveBow(this);
+            DeleteArcher(archer);
+        }
+    }
+
+    private void DeleteArcher(Archer archer)
+    {
+        if (_archers.Contains(archer))
+        {
+            _archers.Remove(archer);
+            Console.WriteLine($"Archer {string.Join(" ", archer.Names)} no longer uses this bow!");
+        }
+        else
+        {
+            Console.WriteLine($"Archer {string.Join(" ", archer.Names)} does not use this bow!");
+        }
+    }
+
     public override string ToString()
     {
         return $"Bow {Id} made of {_material}";

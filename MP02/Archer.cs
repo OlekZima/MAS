@@ -5,27 +5,30 @@ namespace MP02;
 public class Archer
 {
     private static int _idCounter = 1;
-    private readonly Bow _bow;
     private readonly List<Compete> _competes = [];
+    private Bow _bow;
+    private Club _club;
     private Coach _coach;
 
-    private Archer(Bow bow, List<string> names)
+    private Archer(Bow bow, List<string> names, Club club)
     {
         _bow = bow;
         Names = names;
+        _club = club;
+        _club.AddMember(this);
         Id = _idCounter;
         _idCounter++;
     }
 
-    public int Id { get; init; }
+    public int? Id { get; set; }
 
     public List<string> Names { get; init; }
 
-    public static Archer CreateArcher(Bow? bow, List<string> names)
+    public static Archer CreateArcher(Bow? bow, List<string> names, Club club)
     {
         if (bow == null) throw new Exception("This bow does not exist!");
 
-        var archer = new Archer(bow, names);
+        var archer = new Archer(bow, names, club);
         bow.AddArcher(archer);
         return archer;
     }
@@ -52,6 +55,7 @@ public class Archer
 
     public override string ToString()
     {
+        if (_bow == null) return "This archer is not more exist!";
         var namesStr = new StringBuilder("Archer ");
         foreach (var name in Names) namesStr.Append($"{name} ");
         return $"{namesStr}has a coach {_coach}, {_bow}";
@@ -66,5 +70,26 @@ public class Archer
         }
 
         _competes.Add(compete);
+    }
+
+    public Bow GetBow()
+    {
+        return _bow;
+    }
+
+    public void RemoveBow(Bow bow)
+    {
+        if (_bow == bow)
+        {
+            _club = null;
+            _coach = null;
+            _competes.Clear();
+            _bow = null;
+            Console.WriteLine($"Archer {string.Join(" ", Names)} is not longer a member of any club and has no coach!");
+        }
+        else
+        {
+            throw new Exception("This archer does not use this bow!");
+        }
     }
 }
