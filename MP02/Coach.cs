@@ -2,7 +2,7 @@
 
 public class Coach
 {
-    private readonly List<Archer> _archers = new();
+    private List<Archer> _archers = [];
 
     public Coach(List<string> names)
     {
@@ -16,6 +16,13 @@ public class Coach
         if (_archers.Contains(archer)) return;
         _archers.Add(archer);
         archer.AddCoach(this);
+    }
+    
+    public void RemoveArcher(Archer archer)
+    {
+        if (!_archers.Contains(archer)) return;
+        _archers.Remove(archer);
+        archer.RemoveCoach(this);
     }
 
     public override string ToString()

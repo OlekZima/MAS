@@ -9,6 +9,7 @@ public enum Material
 public class Bow
 {
     private static int _idCounter = 1;
+    private static readonly List<Bow> _bows = [];
     private readonly List<Archer> _archers = [];
     private readonly Material _material;
 
@@ -17,6 +18,7 @@ public class Bow
         _material = material;
         Id = _idCounter;
         _idCounter++;
+        _bows.Add(this);
     }
 
     public int Id { get; init; }
@@ -35,6 +37,11 @@ public class Bow
             throw new Exception($"Archer {string.Join(" ", archer.Names)} already uses this bow!");
     }
 
+    public static IReadOnlyCollection<Bow> GetBows()
+    {
+        return _bows.AsReadOnly();
+    }
+    
     public void DeleteBow()
     {
         var archersToBeDeleted = new List<Archer>(_archers);
@@ -43,6 +50,8 @@ public class Bow
             archer.RemoveBow(this);
             DeleteArcher(archer);
         }
+
+        _bows.Remove(this);
     }
 
     private void DeleteArcher(Archer archer)
@@ -60,6 +69,6 @@ public class Bow
 
     public override string ToString()
     {
-        return $"Bow {Id} made of {_material}";
+        return $"Bow {Id} made of {_material};";
     }
 }

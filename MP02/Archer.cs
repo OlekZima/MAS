@@ -4,6 +4,7 @@ namespace MP02;
 
 public class Archer
 {
+    private static List<Archer> _archers = [];
     private static int _idCounter = 1;
     private readonly List<Compete> _competes = [];
     private Bow _bow;
@@ -18,6 +19,7 @@ public class Archer
         _club.AddMember(this);
         Id = _idCounter;
         _idCounter++;
+        _archers.Add(this);
     }
 
     public int? Id { get; set; }
@@ -77,19 +79,33 @@ public class Archer
         return _bow;
     }
 
+    public static IReadOnlyCollection<Archer> GetArchers()
+    {
+        return _archers.AsReadOnly();
+    }
+
     public void RemoveBow(Bow bow)
     {
-        if (_bow == bow)
+        if (_bow != bow)
         {
-            _club = null;
-            _coach = null;
-            _competes.Clear();
-            _bow = null;
-            Console.WriteLine($"Archer {string.Join(" ", Names)} is not longer a member of any club and has no coach!");
+            return;
         }
-        else
+        _club = null;
+        _coach.RemoveArcher(this);
+        _coach = null;
+        _competes.Clear();
+        _bow = null;
+        _archers.Remove(this);
+        Console.WriteLine($"Archer {string.Join(" ", Names)} is deleted!");
+    }
+    
+    public void RemoveCoach(Coach coach)
+    {
+        if (_coach != coach)
         {
-            throw new Exception("This archer does not use this bow!");
+            return;
         }
+        _coach = null;
+        coach.RemoveArcher(this);
     }
 }

@@ -35,6 +35,19 @@ Console.WriteLine(club1);
 Console.WriteLine(club1.GetMember(archer1.Names[^1]));
 
 
-Console.WriteLine(archer2);
-bow2.DeleteBow();
-Console.WriteLine(archer2);
+
+Console.WriteLine("Ekstencja Bow przed usunięciem.");
+Console.WriteLine(string.Join(" ", Bow.GetBows().ToList()));
+
+Console.WriteLine("Ekstencja Archer przed usunięciem.");
+Console.WriteLine(string.Join(" ", Archer.GetArchers().ToList()));
+Console.WriteLine(archer1);
+bow1.DeleteBow();
+Console.WriteLine(archer1);
+
+Console.WriteLine("Ekstencja Archer po usunięciu.");
+Console.WriteLine(string.Join(" ", Archer.GetArchers().ToList()));
+
+
+Console.WriteLine("Ekstencja Bow po usunięciem.");
+Console.WriteLine(string.Join(" ", Bow.GetBows().ToList()));
