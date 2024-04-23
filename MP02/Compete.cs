@@ -14,6 +14,8 @@ public class Compete
         Date = date;
         Id = _idCounter;
         _idCounter++;
+        competition.AddCompete(this);
+        archer.AddCompete(this);
     }
 
     public int Id { get; init; }
