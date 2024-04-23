@@ -86,10 +86,7 @@ public class Archer
 
     public void RemoveBow(Bow bow)
     {
-        if (_bow != bow)
-        {
-            return;
-        }
+        if (_bow != bow) return;
         _club = null;
         _coach.RemoveArcher(this);
         _coach = null;
@@ -98,13 +95,10 @@ public class Archer
         _archers.Remove(this);
         Console.WriteLine($"Archer {string.Join(" ", Names)} is deleted!");
     }
-    
+
     public void RemoveCoach(Coach coach)
     {
-        if (_coach != coach)
-        {
-            return;
-        }
+        if (_coach != coach) return;
         _coach = null;
         coach.RemoveArcher(this);
     }

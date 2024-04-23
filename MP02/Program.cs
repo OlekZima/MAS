@@ -35,7 +35,6 @@ Console.WriteLine(club1);
 Console.WriteLine(club1.GetMember(archer1.Names[^1]));
 
 
-
 Console.WriteLine("Ekstencja Bow przed usunięciem.");
 Console.WriteLine(string.Join(" ", Bow.GetBows().ToList()));
 

@@ -9,8 +9,8 @@ public enum Material
 public class Bow
 {
     private static int _idCounter = 1;
-    private static readonly List<Bow> _bows = [];
-    private readonly List<Archer> _archers = [];
+    private static readonly List<Bow> _bows = 
+    private readonly List<Archer> _archers = 
     private readonly Material _material;
 
     public Bow(Material material)
@@ -22,6 +22,7 @@ public class Bow
     }
 
     public int Id { get; init; }
+    [];[];
 
 
     public Material GetMaterial()
@@ -41,7 +42,7 @@ public class Bow
     {
         return _bows.AsReadOnly();
     }
-    
+
     public void DeleteBow()
     {
         var archersToBeDeleted = new List<Archer>(_archers);

@@ -17,7 +17,7 @@ public class Coach
         _archers.Add(archer);
         archer.AddCoach(this);
     }
-    
+
     public void RemoveArcher(Archer archer)
     {
         if (!_archers.Contains(archer)) return;
