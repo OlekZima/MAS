@@ -10,7 +10,7 @@ public class Archer
     /// <summary>
     ///     Ekstensja
     /// </summary>
-    private static List<Archer> Archers = 
+    private static List<Archer> Archers = [];
 
     /// <summary>
     ///     Identyfikator
@@ -41,16 +41,17 @@ public class Archer
     /// <summary>
     ///     Atrybut powtarzalny
     /// </summary>
-    public List<string> Names { get; set; } = 
+    public List<string> Names { get; set; } = [];
 
 
     /// <summary>
-    ///     Atrybut złożony
+    /// Atrybut złożony
     /// </summary>
     [JsonInclude]
-    private List<Arrow> Arrows { get; set; } = 
+    private List<Arrow> Arrows { get; set; } = [];
 
-    [JsonInclude] private DateOnly DateOfJoining { get; set; }
+    [JsonInclude] 
+    private DateOnly DateOfJoining { get; set; }
 
 
     /// <summary>
@@ -79,8 +80,6 @@ public class Archer
             return (DateTime.Today - dateTimeOfJoining).Days;
         }
     }
-
-    [];[];[];
 
     public static void SerializeArchers()
     {

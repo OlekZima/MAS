@@ -1,4 +1,5 @@
 ﻿using MP03;
+using MP03.Dynamic;
 using MP03.Multi_faceted_Inheritance;
 using MP03.Multiple_Inheritance;
 using MP03.Overlapping;
@@ -70,3 +71,16 @@ cupPurposeKitchen1.SetIsDishwasherSafe(true);
 Console.WriteLine(cupPurposeKitchen1.GetIsDishwasherSafe());
 Console.WriteLine(cupPurposeRestaurant1.GetIsClean());
 Console.WriteLine(cupPurposeKitchen1.GetCup());
+
+
+Console.WriteLine("=====Essence=====");
+
+var reason1 = "x1";
+var date1 = new DateOnly(2020, 12, 24);
+var life1 = new Life(20, date1, reason1);
+Console.WriteLine(life1);
+
+var reason2 = "x2";
+var date2 = new DateOnly(2020, 12, 25);
+var death1 = new Death(life1, 40);
+Console.WriteLine(death1);

@@ -3,7 +3,7 @@ namespace MP02;
 public class Competition
 {
     private static int _idCounter = 1;
-    private readonly List<Compete> _competes = 
+    private readonly List<Compete> _competes = [];
 
     public Competition(string name)
     {
@@ -15,7 +15,6 @@ public class Competition
     public string Name { get; init; }
 
     public int Id { get; init; }
-    [];
 
     public Archer? GetArcher(int archerId)
     {
