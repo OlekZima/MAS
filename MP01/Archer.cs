@@ -10,7 +10,7 @@ public class Archer
     /// <summary>
     ///     Ekstensja
     /// </summary>
-    private static List<Archer> Archers = [];
+    private static List<Archer> _archers = [];
 
     /// <summary>
     ///     Identyfikator
@@ -22,7 +22,7 @@ public class Archer
     {
         Id = _idCounter++;
         Arrows = new List<Arrow>();
-        Archers.Add(this);
+        _archers.Add(this);
     }
 
     public Archer(List<Arrow> arrows, DateOnly dateOfJoining)
@@ -32,7 +32,7 @@ public class Archer
 
         Id = _idCounter++;
         Arrows = new List<Arrow>();
-        Archers.Add(this);
+        _archers.Add(this);
     }
 
     public int Id { get; }
@@ -86,7 +86,7 @@ public class Archer
         try
         {
             var serializerOptions = new JsonSerializerOptions { IncludeFields = true };
-            var serializedString = JsonSerializer.Serialize(Archers, serializerOptions);
+            var serializedString = JsonSerializer.Serialize(_archers, serializerOptions);
             File.WriteAllText("archers.json", serializedString);
         }
         catch (Exception e)
@@ -109,9 +109,9 @@ public class Archer
 
             var deserializerOptions = new JsonSerializerOptions { IncludeFields = true };
             var deserializedArchers = JsonSerializer.Deserialize<List<Archer>>(jsonString, deserializerOptions);
-            if (deserializedArchers != null) Archers = deserializedArchers;
+            if (deserializedArchers != null) _archers = deserializedArchers;
 
-            if (Archers.Count >= 1)
+            if (_archers.Count >= 1)
             {
                 Console.WriteLine("Deserializacja powiodła się");
                 return;
@@ -129,7 +129,7 @@ public class Archer
 
     public static IReadOnlyList<Archer> GetArchers()
     {
-        return Archers.AsReadOnly();
+        return _archers.AsReadOnly();
     }
 
     public override string ToString()
